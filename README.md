@@ -415,7 +415,7 @@ Operasi dijalankan dalam transaksi dan menggunakan `rollback()` ketika gagal. Pr
 
 Pengujian dilakukan melalui menu `TestORM` dan diverifikasi langsung di MySQL. Pengujian mencakup tambah, baca, update, hapus, validasi, dan persistensi setelah program dijalankan ulang.
 
-Karena menggunakan tabel yang sama, data yang disimpan melalui ORM dapat dibaca melalui menu pengajar pada aplikasi JDBC. Hasil setiap pengujian dicatat sesuai kondisi aktual.
+Karena menggunakan tabel yang sama, data yang disimpan melalui ORM dapat dibaca melalui menu pengajar pada aplikasi JDBC. Hasil setiap pengujian dicatat sesuai kondisi aktual
 
 <p align="center">
 <img width="365" height="130" alt="image" src="https://github.com/user-attachments/assets/578c9606-5a88-48a1-aaf8-7f17b6c245e4" />
