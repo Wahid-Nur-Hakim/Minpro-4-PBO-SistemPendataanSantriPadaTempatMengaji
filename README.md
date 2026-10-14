@@ -20,20 +20,29 @@ Dibangun dengan menerapkan prinsip-prinsip Object-Oriented Programming (OOP) sep
 
 ## 📁 Struktur Package
 
+## 📁 Struktur Package
+
 <p align="justify">
-Program ini menggunakan struktur package MVC (Model-View-Controller) yang terpisah dengan jelas untuk memisahkan logika bisnis, tampilan, dan model data.
+Program menggunakan pembagian package berdasarkan tanggung jawab untuk memisahkan model data, tampilan, dan alur pengelolaan data. Integrasi database JDBC ditempatkan pada package config dan dao, sedangkan implementasi tambahan Hibernate ORM ditempatkan pada package orm. Pembagian ini menjaga struktur OOP yang sudah dibuat dan memudahkan pemeliharaan program.
 </p>
 
 | Package | File | Fungsi |
 |---------|------|--------|
-| `main` | `MiniProject3.java` | Titik masuk program (main method) |
-| `controller` | `CrudUmmi.java` | Mengatur logika CRUD dan interaksi data |
-| `model` | `RumahQuran.java` | Abstract class sebagai parent Santri & Pengajar |
-| `model` | `Santri.java` | Model data untuk santri |
-| `model` | `Pengajar.java` | Model data untuk pengajar |
-| `model` | `KelasMengaji.java` | Model data untuk kelas mengaji |
-| `model` | `CariData.java` | Interface untuk metode pencarian |
-| `view` | `Menu.java` | Menampilkan menu dan input user |
+| `main` | `MiniProject4.java` | Titik masuk aplikasi utama, melakukan pengecekan koneksi database, dan menjalankan menu program |
+| `controller` | `CrudUmmi.java` | Mengatur alur CRUD, validasi input, pencarian, dan pemanggilan DAO |
+| `model` | `RumahQuran.java` | Abstract class yang menyediakan atribut serta method umum bagi Santri dan Pengajar |
+| `model` | `Santri.java` | Model data santri yang memiliki umur dan relasi ke kelas mengaji |
+| `model` | `Pengajar.java` | Model data pengajar beserta informasi kelas mengajar |
+| `model` | `KelasMengaji.java` | Model data kelas yang menyimpan kode, nama kelas, pengajar, dan kapasitas |
+| `model` | `CariData.java` | Interface yang mendefinisikan kontrak pencocokan data melalui method cocokDengan() |
+| `view` | `Menu.java` | Menampilkan menu, membaca input pengguna, dan menampilkan pesan |
+| `config` | `Koneksi.java` | Menyediakan koneksi JDBC ke database MySQL |
+| `config` | `TestKoneksi.java` | Class pengujian terpisah untuk memeriksa koneksi database |
+| `dao` | `SantriDAO.java` | Menjalankan query JDBC untuk tambah, baca, update kelas, hapus, dan pencarian data santri |
+| `dao` | `PengajarDAO.java` | Menjalankan query JDBC untuk tambah, baca, update kelas mengajar, hapus, dan pencarian data pengajar |
+| `dao` | `KelasMengajiDAO.java` | Menjalankan query JDBC untuk CRUD kelas serta menghitung jumlah santri dalam kelas |
+| `orm` | `PengajarEntity.java` | Memetakan objek pengajar ke tabel pengajar menggunakan annotation Hibernate |
+| `orm` | `TestORM.java` | Mengatur konfigurasi Hibernate dan menyediakan menu pengujian CRUD ORM pada data pengajar |
 
 ---
 
@@ -327,7 +336,7 @@ Database menggunakan tiga tabel utama: `pengajar`, `kelas_mengaji`, dan `santri`
 Relasi ini sesuai dengan model OOP pada program: satu kelas mengaji memiliki satu pengajar, dan satu santri berada pada satu kelas mengaji. Foreign key juga membantu menjaga konsistensi data, misalnya kelas tidak dapat dihapus apabila masih digunakan oleh data santri.
 
 <p align="center">
-  <img width="800" alt="Struktur tabel MySQL" src="LINK_SCREENSHOT_STRUKTUR_DATABASE" />
+<img width="267" height="183" alt="image" src="https://github.com/user-attachments/assets/c21a0e08-a0a2-4923-85c5-fb1b4f922c80" />
 </p>
 
 <p align="center">
@@ -357,7 +366,7 @@ Program menggunakan Hibernate ORM sebagai fitur tambahan untuk mengelola data pe
 Dependency `hibernate-core` ditambahkan pada `pom.xml`. Konfigurasi koneksi dan pendaftaran entity ditempatkan pada `TestORM`, kemudian digunakan untuk membuat `SessionFactory`. Properti `hibernate.hbm2ddl.auto=validate` memeriksa kesesuaian mapping tanpa membuat ulang tabel, sedangkan `hibernate.show_sql=false` menyembunyikan query SQL dari console.
 
 <p align="center">
-  <img width="800" alt="Dependency Hibernate pada Maven" src="LINK_SCREENSHOT_DEPENDENCY" />
+<img width="434" height="128" alt="image" src="https://github.com/user-attachments/assets/8793a837-8cce-4ea2-a9ea-668d3d9cc8bf" />
 </p>
 
 <p align="center">
