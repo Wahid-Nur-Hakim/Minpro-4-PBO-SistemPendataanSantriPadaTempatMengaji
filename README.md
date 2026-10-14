@@ -207,21 +207,21 @@ Dengan penerapan JDBC, data yang ditambahkan, diubah, atau dihapus melalui aplik
 Koneksi database dikelola oleh class `Koneksi` pada package `config`. Class ini menyimpan konfigurasi URL database, username, dan password, kemudian menyediakan method `getConnection()` untuk membuat koneksi ke MySQL menggunakan `DriverManager`.
 
 <p align="center">
-  <img width="800" alt="Class Koneksi JDBC" src="LINK_SCREENSHOT_KONEKSI" />
+<img width="759" height="403" alt="image" src="https://github.com/user-attachments/assets/3b0c20fe-15d6-435a-8b3e-ef6c53d90ac3" />
 </p>
 
 <p align="center">
-  <em>Gambar 1: Class <code>Koneksi</code> yang mengatur koneksi antara program Java dan database MySQL.</em>
+  <em>Class <code>Koneksi</code> yang mengatur koneksi antara program Java dan database MySQL.</em>
 </p>
 
 Program juga melakukan pengecekan koneksi di awal melalui class utama `MiniProject4`. Jika koneksi berhasil, program menampilkan status bahwa database siap digunakan dan menu utama dijalankan. Jika koneksi gagal, program menampilkan penyebab kegagalan dan menghentikan proses agar operasi CRUD tidak berjalan dalam kondisi database tidak tersedia.
 
 <p align="center">
-  <img width="800" alt="Pengecekan koneksi pada MiniProject4" src="LINK_SCREENSHOT_MAIN_KONEKSI" />
+<img width="549" height="382" alt="image" src="https://github.com/user-attachments/assets/8380a19e-c8c4-43bb-871f-abe0f308fd8f" />
 </p>
 
 <p align="center">
-  <em>Gambar 2: Pengecekan koneksi database pada awal program sebelum menu utama ditampilkan.</em>
+  <em>Pengecekan koneksi database pada awal program sebelum menu utama ditampilkan.</em>
 </p>
 
 ---
@@ -231,11 +231,11 @@ Program juga melakukan pengecekan koneksi di awal melalui class utama `MiniProje
 Program menggunakan dependency **MySQL Connector/J** melalui Maven. Dependency ini berfungsi sebagai driver JDBC agar aplikasi Java dapat berkomunikasi dengan MySQL. Konfigurasi dependency ditempatkan pada file `pom.xml`, sehingga Maven dapat mengunduh dan mengelola library database secara otomatis.
 
 <p align="center">
-  <img width="800" alt="Dependency MySQL Connector J" src="LINK_SCREENSHOT_POM" />
+<img width="420" height="120" alt="image" src="https://github.com/user-attachments/assets/52bffab8-8b12-44fb-b1cf-a29ce3548568" />
 </p>
 
 <p align="center">
-  <em>Gambar 3: Dependency MySQL Connector/J pada file <code>pom.xml</code> untuk menghubungkan Java dengan MySQL.</em>
+  <em>Dependency MySQL Connector/J pada file <code>pom.xml</code> untuk menghubungkan Java dengan MySQL.</em>
 </p>
 
 ---
@@ -247,11 +247,11 @@ Program menerapkan pola **DAO (Data Access Object)** dengan membuat class `Santr
 Pemisahan ini membuat class `CrudUmmi` tetap berfokus pada alur program, validasi input, dan komunikasi dengan menu, sedangkan proses SQL seperti tambah, tampil, ubah, hapus, dan pencarian diletakkan di DAO. Dengan demikian, query database tidak ditulis di class `Menu` ataupun class model.
 
 <p align="center">
-  <img width="800" alt="Struktur Package DAO" src="LINK_SCREENSHOT_PACKAGE_DAO" />
+<img width="229" height="84" alt="image" src="https://github.com/user-attachments/assets/b9d2cdbd-1034-4eef-bf38-c5db2ab693ad" />
 </p>
 
 <p align="center">
-  <em>Gambar 4: Package <code>dao</code> yang memisahkan operasi database berdasarkan entitas Santri, Pengajar, dan Kelas Mengaji.</em>
+  <em>Package <code>dao</code> yang memisahkan operasi database berdasarkan entitas Santri, Pengajar, dan Kelas Mengaji.</em>
 </p>
 
 ---
@@ -263,11 +263,11 @@ Seluruh query yang menerima input pengguna menggunakan `PreparedStatement`. Quer
 Penggunaan `PreparedStatement` membuat query lebih aman dan terstruktur karena nilai input diproses sebagai parameter, bukan digabungkan langsung ke dalam teks SQL. Hal ini juga memudahkan penggunaan query yang sama dengan nilai berbeda untuk operasi tambah, ubah, hapus, dan pencarian.
 
 <p align="center">
-  <img width="800" alt="PreparedStatement pada DAO" src="LINK_SCREENSHOT_PREPARED_STATEMENT" />
+<img width="671" height="505" alt="image" src="https://github.com/user-attachments/assets/af7594e6-278d-4dbc-ab77-bfce9261701c" />
 </p>
 
 <p align="center">
-  <em>Gambar 5: Contoh penggunaan <code>PreparedStatement</code> pada DAO untuk menjalankan query dengan parameter input.</em>
+  <em>Contoh penggunaan <code>PreparedStatement</code> pada DAO untuk menjalankan query dengan parameter input.</em>
 </p>
 
 ---
@@ -287,11 +287,11 @@ Fitur CRUD pada program telah dihubungkan ke database MySQL melalui DAO:
 Sebagai contoh, fitur tambah santri terlebih dahulu memvalidasi nama, umur, nomor telepon wali, dan kelas yang dipilih. Setelah input valid, program membuat objek `Santri`, lalu memanggil method `insert()` pada `SantriDAO`. DAO kemudian menyimpan data tersebut ke tabel `santri` di MySQL.
 
 <p align="center">
-  <img width="800" alt="Integrasi CrudUmmi dengan SantriDAO" src="LINK_SCREENSHOT_CRUD_KE_DAO" />
+<img width="550" height="168" alt="image" src="https://github.com/user-attachments/assets/8f2ef7c4-0544-4478-b138-7db3bb50d3c4" />
 </p>
 
 <p align="center">
-  <em>Gambar 6: Class <code>CrudUmmi</code> memanggil <code>SantriDAO</code> untuk menyimpan data santri ke database.</em>
+  <em>Class <code>CrudUmmi</code> memanggil <code>SantriDAO</code> untuk menyimpan data santri ke database.</em>
 </p>
 
 ---
@@ -303,11 +303,19 @@ Setiap operasi database dibungkus dengan `try-catch` untuk menangani `SQLExcepti
 Selain itu, program menggunakan `try-with-resources` untuk menutup objek `Connection`, `PreparedStatement`, dan `ResultSet` secara otomatis setelah query selesai. Cara ini membantu mencegah resource database tetap terbuka atau koneksi bocor ketika program mengalami error.
 
 <p align="center">
-  <img width="800" alt="Try with resources dan penanganan SQLException" src="LINK_SCREENSHOT_ERROR_HANDLING" />
+<img width="615" height="171" alt="image" src="https://github.com/user-attachments/assets/daf7441b-dfbf-41dd-a82c-f658ac6a6d62" />
 </p>
 
 <p align="center">
-  <em>Gambar 7: Penggunaan <code>try-with-resources</code> dan <code>SQLException</code> untuk menutup resource serta menangani error database secara aman.</em>
+  <em>Penggunaan <code>try-with-resources</code> untuk menutup resource serta menangani error database secara aman.</em>
+</p>
+
+<p align="center">
+<img width="608" height="65" alt="image" src="https://github.com/user-attachments/assets/e1dbacca-a76e-4623-8155-48141d39265c" />
+</p>
+
+<p align="center">
+  <em>Penanganan SQLException pada controller untuk menampilkan pesan yang jelas ketika operasi database gagal.</em>
 </p>
 
 ---
