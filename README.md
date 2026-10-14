@@ -194,6 +194,8 @@ Abstract class RumahQuran mendefinisikan struktur dasar yang harus dimiliki oleh
 Interface CariData mendefinisikan kontrak yang harus dipenuhi oleh kelas yang mengimplementasikannya, yaitu method cocokDengan(String kataKunci). Interface ini diimplementasikan oleh kelas Santri dan Pengajar untuk memungkinkan fitur pencarian global. Dengan interface, program mencapai loose coupling di mana kelas yang menggunakan interface tidak perlu tahu detail implementasi dari kelas yang mengimplementasikannya.
 </p>
 
+---
+
 ## 🗄️ Penerapan JDBC dan Database
 
 Program Rumah Quran Al-Hafizh telah diintegrasikan dengan database **MySQL** menggunakan **JDBC (Java Database Connectivity)**. JDBC digunakan sebagai penghubung antara aplikasi Java dan database, sehingga data pengajar, kelas mengaji, dan santri tidak lagi tersimpan sementara di dalam `ArrayList`, tetapi tersimpan secara permanen di MySQL.
@@ -222,6 +224,8 @@ Program juga melakukan pengecekan koneksi di awal melalui class utama `MiniProje
   <em>Gambar 2: Pengecekan koneksi database pada awal program sebelum menu utama ditampilkan.</em>
 </p>
 
+---
+
 ### 📦 Dependency MySQL Connector/J
 
 Program menggunakan dependency **MySQL Connector/J** melalui Maven. Dependency ini berfungsi sebagai driver JDBC agar aplikasi Java dapat berkomunikasi dengan MySQL. Konfigurasi dependency ditempatkan pada file `pom.xml`, sehingga Maven dapat mengunduh dan mengelola library database secara otomatis.
@@ -233,6 +237,8 @@ Program menggunakan dependency **MySQL Connector/J** melalui Maven. Dependency i
 <p align="center">
   <em>Gambar 3: Dependency MySQL Connector/J pada file <code>pom.xml</code> untuk menghubungkan Java dengan MySQL.</em>
 </p>
+
+---
 
 ### 🧩 Penerapan DAO
 
@@ -248,6 +254,8 @@ Pemisahan ini membuat class `CrudUmmi` tetap berfokus pada alur program, validas
   <em>Gambar 4: Package <code>dao</code> yang memisahkan operasi database berdasarkan entitas Santri, Pengajar, dan Kelas Mengaji.</em>
 </p>
 
+---
+
 ### 🔐 Penggunaan PreparedStatement
 
 Seluruh query yang menerima input pengguna menggunakan `PreparedStatement`. Query SQL menggunakan placeholder `?`, kemudian nilai input dimasukkan melalui method seperti `setString()` dan `setInt()` sebelum query dijalankan.
@@ -261,6 +269,8 @@ Penggunaan `PreparedStatement` membuat query lebih aman dan terstruktur karena n
 <p align="center">
   <em>Gambar 5: Contoh penggunaan <code>PreparedStatement</code> pada DAO untuk menjalankan query dengan parameter input.</em>
 </p>
+
+---
 
 ### 🔄 Operasi CRUD dan Pencarian
 
@@ -284,6 +294,8 @@ Sebagai contoh, fitur tambah santri terlebih dahulu memvalidasi nama, umur, nomo
   <em>Gambar 6: Class <code>CrudUmmi</code> memanggil <code>SantriDAO</code> untuk menyimpan data santri ke database.</em>
 </p>
 
+---
+
 ### 🛡️ Penanganan Error dan Resource
 
 Setiap operasi database dibungkus dengan `try-catch` untuk menangani `SQLException`. Jika terjadi kegagalan koneksi, tabel tidak ditemukan, query salah, atau data masih memiliki relasi dengan tabel lain, program menampilkan pesan error yang jelas dan tidak menampilkan pesan keberhasilan.
@@ -297,6 +309,8 @@ Selain itu, program menggunakan `try-with-resources` untuk menutup objek `Connec
 <p align="center">
   <em>Gambar 7: Penggunaan <code>try-with-resources</code> dan <code>SQLException</code> untuk menutup resource serta menangani error database secara aman.</em>
 </p>
+
+---
 
 ### 🧱 Struktur Database dan Relasi
 
@@ -312,17 +326,23 @@ Relasi ini sesuai dengan model OOP pada program: satu kelas mengaji memiliki sat
   <em>Gambar 8: Struktur tabel database MySQL beserta relasi antara pengajar, kelas mengaji, dan santri.</em>
 </p>
 
+---
+
 ### ✅ Persistensi Data
 
 Setelah integrasi database, data utama tidak lagi dibuat ulang dari constructor `CrudUmmi`. Data dummy awal dimasukkan melalui file SQL, kemudian seluruh data dibaca dari MySQL saat fitur tampil data atau pencarian dijalankan.
 
 Dengan pendekatan ini, data tetap tersedia setelah aplikasi ditutup dan dijalankan ulang. Hal tersebut membuktikan bahwa aplikasi telah menerapkan persistensi data menggunakan MySQL.
 
+---
+
 ## ⭐ Penjelasan Letak Penerapan Nilai Tambah
 
 ## ⚙️ Penerapan ORM dengan Hibernate
 
 Program menggunakan Hibernate ORM sebagai fitur tambahan untuk mengelola data pengajar melalui objek Java. Implementasi ORM dijalankan melalui `TestORM`, sedangkan aplikasi utama `MiniProject4` tetap menggunakan JDBC dan DAO. Keduanya mengakses database `db_rq_alhafizh` yang sama.
+
+---
 
 ### 📦 Dependency dan Konfigurasi
 
@@ -344,6 +364,8 @@ Dependency `hibernate-core` ditambahkan pada `pom.xml`. Konfigurasi koneksi dan 
   <em>Gambar 2: Konfigurasi Hibernate untuk mengakses MySQL dan mendaftarkan PengajarEntity.</em>
 </p>
 
+---
+
 ### 🧩 Pemetaan Entity
 
 Class `PengajarEntity` dipetakan ke tabel `pengajar` menggunakan annotation `@Entity`, `@Table`, dan `@Column`. Primary key ditentukan melalui `@Id`, sedangkan `@GeneratedValue` dengan strategi `IDENTITY` mengikuti pembentukan ID melalui `AUTO_INCREMENT` pada MySQL. Entity ini dibuat terpisah agar model OOP dan DAO JDBC yang sudah ada tetap dipertahankan.
@@ -355,6 +377,8 @@ Class `PengajarEntity` dipetakan ke tabel `pengajar` menggunakan annotation `@En
 <p align="center">
   <em>Gambar 3: Pemetaan atribut PengajarEntity ke tabel pengajar.</em>
 </p>
+
+---
 
 ### 🔄 CRUD dan Penanganan Error
 
@@ -369,6 +393,8 @@ Operasi dijalankan dalam transaksi dan menggunakan `rollback()` ketika gagal. Pr
 <p align="center">
   <em>Gambar 4: Contoh penyimpanan pengajar melalui persist(), commit, dan penanganan kegagalan transaksi.</em>
 </p>
+
+---
 
 ### ✅ Pengujian dan Integrasi JDBC
 
@@ -399,6 +425,8 @@ Karena menggunakan tabel yang sama, data yang disimpan melalui ORM dapat dibaca 
 <p align="center">
   <em>Gambar 7: Data pengajar yang dibuat melalui ORM ditampilkan pada aplikasi JDBC.</em>
 </p>
+
+---
 
 ### ⚖️ Perbedaan JDBC dan ORM pada Program
 
