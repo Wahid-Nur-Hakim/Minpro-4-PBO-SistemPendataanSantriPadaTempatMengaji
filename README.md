@@ -433,10 +433,6 @@ Karena menggunakan tabel yang sama, data yang disimpan melalui ORM dapat dibaca 
   <em>Verifikasi data pengajar yang disimpan melalui ORM pada MySQL.</em>
 </p>
 
-<p align="center">
-  <img width="800" alt="Data ORM pada aplikasi JDBC" src="LINK_SCREENSHOT_INTEGRASI" />
-</p>
-
 ---
 
 ### ⚖️ Perbedaan JDBC dan ORM pada Program
