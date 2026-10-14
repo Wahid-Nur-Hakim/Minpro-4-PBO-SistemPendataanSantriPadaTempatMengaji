@@ -20,8 +20,6 @@ Dibangun dengan menerapkan prinsip-prinsip Object-Oriented Programming (OOP) sep
 
 ## 📁 Struktur Package
 
-## 📁 Struktur Package
-
 <p align="justify">
 Program menggunakan pembagian package berdasarkan tanggung jawab untuk memisahkan model data, tampilan, dan alur pengelolaan data. Integrasi database JDBC ditempatkan pada package config dan dao, sedangkan implementasi tambahan Hibernate ORM ditempatkan pada package orm. Pembagian ini menjaga struktur OOP yang sudah dibuat dan memudahkan pemeliharaan program.
 </p>
@@ -38,9 +36,9 @@ Program menggunakan pembagian package berdasarkan tanggung jawab untuk memisahka
 | `view` | `Menu.java` | Menampilkan menu, membaca input pengguna, dan menampilkan pesan |
 | `config` | `Koneksi.java` | Menyediakan koneksi JDBC ke database MySQL |
 | `config` | `TestKoneksi.java` | Class pengujian terpisah untuk memeriksa koneksi database |
-| `dao` | `SantriDAO.java` | Menjalankan query JDBC untuk tambah, baca, update kelas, hapus, dan pencarian data santri |
-| `dao` | `PengajarDAO.java` | Menjalankan query JDBC untuk tambah, baca, update kelas mengajar, hapus, dan pencarian data pengajar |
-| `dao` | `KelasMengajiDAO.java` | Menjalankan query JDBC untuk CRUD kelas serta menghitung jumlah santri dalam kelas |
+| `model.dao` | `SantriDAO.java` | Menjalankan query JDBC untuk tambah, baca, update kelas, hapus, dan pencarian data santri |
+| `model.dao` | `PengajarDAO.java` | Menjalankan query JDBC untuk tambah, baca, update kelas mengajar, hapus, dan pencarian data pengajar |
+| `model.dao` | `KelasMengajiDAO.java` | Menjalankan query JDBC untuk CRUD kelas serta menghitung jumlah santri dalam kelas |
 | `orm` | `PengajarEntity.java` | Memetakan objek pengajar ke tabel pengajar menggunakan annotation Hibernate |
 | `orm` | `TestORM.java` | Mengatur konfigurasi Hibernate dan menyediakan menu pengujian CRUD ORM pada data pengajar |
 
@@ -370,15 +368,15 @@ Dependency `hibernate-core` ditambahkan pada `pom.xml`. Konfigurasi koneksi dan 
 </p>
 
 <p align="center">
-  <em>Gambar 1: Dependency Hibernate ORM pada file pom.xml.</em>
+  <em>Dependency Hibernate ORM pada file pom.xml.</em>
 </p>
 
 <p align="center">
-  <img width="800" alt="Konfigurasi Hibernate" src="LINK_SCREENSHOT_KONFIGURASI" />
+<img width="475" height="763" alt="image" src="https://github.com/user-attachments/assets/07a0af0b-1ee4-41ab-9519-3050a249c82f" />
 </p>
 
 <p align="center">
-  <em>Gambar 2: Konfigurasi Hibernate untuk mengakses MySQL dan mendaftarkan PengajarEntity.</em>
+  <em>Konfigurasi Hibernate untuk mengakses MySQL dan mendaftarkan PengajarEntity.</em>
 </p>
 
 ---
@@ -388,11 +386,11 @@ Dependency `hibernate-core` ditambahkan pada `pom.xml`. Konfigurasi koneksi dan 
 Class `PengajarEntity` dipetakan ke tabel `pengajar` menggunakan annotation `@Entity`, `@Table`, dan `@Column`. Primary key ditentukan melalui `@Id`, sedangkan `@GeneratedValue` dengan strategi `IDENTITY` mengikuti pembentukan ID melalui `AUTO_INCREMENT` pada MySQL. Entity ini dibuat terpisah agar model OOP dan DAO JDBC yang sudah ada tetap dipertahankan.
 
 <p align="center">
-  <img width="800" alt="Pemetaan PengajarEntity" src="LINK_SCREENSHOT_ENTITY" />
+<img width="600" height="358" alt="image" src="https://github.com/user-attachments/assets/086d9b9e-fc03-4c24-85e0-cd2ca231b4f6" />
 </p>
 
 <p align="center">
-  <em>Gambar 3: Pemetaan atribut PengajarEntity ke tabel pengajar.</em>
+  <em>Pemetaan atribut PengajarEntity ke tabel pengajar.</em>
 </p>
 
 ---
@@ -404,11 +402,11 @@ Penambahan data menggunakan `persist()`, pembacaan menggunakan `find()` atau HQL
 Operasi dijalankan dalam transaksi dan menggunakan `rollback()` ketika gagal. Program juga menangani input tidak valid, ID yang tidak ditemukan, serta penghapusan pengajar yang masih digunakan oleh kelas. Pesan berhasil hanya ditampilkan setelah commit selesai.
 
 <p align="center">
-  <img width="800" alt="Operasi ORM dan transaksi" src="LINK_SCREENSHOT_KODE_CRUD" />
+<img width="661" height="317" alt="image" src="https://github.com/user-attachments/assets/3b419e40-097b-45e7-806a-9a09f3bb363d" />
 </p>
 
 <p align="center">
-  <em>Gambar 4: Contoh penyimpanan pengajar melalui persist(), commit, dan penanganan kegagalan transaksi.</em>
+  <em>Contoh penyimpanan pengajar melalui persist(), commit, dan penanganan kegagalan transaksi.</em>
 </p>
 
 ---
@@ -420,27 +418,23 @@ Pengujian dilakukan melalui menu `TestORM` dan diverifikasi langsung di MySQL. P
 Karena menggunakan tabel yang sama, data yang disimpan melalui ORM dapat dibaca melalui menu pengajar pada aplikasi JDBC. Hasil setiap pengujian dicatat sesuai kondisi aktual.
 
 <p align="center">
-  <img width="800" alt="Output penambahan pengajar melalui ORM" src="LINK_SCREENSHOT_OUTPUT_CREATE" />
+<img width="365" height="130" alt="image" src="https://github.com/user-attachments/assets/578c9606-5a88-48a1-aaf8-7f17b6c245e4" />
 </p>
 
 <p align="center">
-  <em>Gambar 5: Output penambahan pengajar melalui Hibernate ORM.</em>
+  <em>Output penambahan pengajar melalui Hibernate ORM.</em>
 </p>
 
 <p align="center">
-  <img width="800" alt="Verifikasi data ORM pada MySQL" src="LINK_SCREENSHOT_DATABASE" />
+<img width="361" height="113" alt="image" src="https://github.com/user-attachments/assets/bc66f75e-3f3c-495e-8a42-3f3d42acf090" />
 </p>
 
 <p align="center">
-  <em>Gambar 6: Verifikasi data pengajar yang disimpan melalui ORM pada MySQL.</em>
+  <em>Verifikasi data pengajar yang disimpan melalui ORM pada MySQL.</em>
 </p>
 
 <p align="center">
   <img width="800" alt="Data ORM pada aplikasi JDBC" src="LINK_SCREENSHOT_INTEGRASI" />
-</p>
-
-<p align="center">
-  <em>Gambar 7: Data pengajar yang dibuat melalui ORM ditampilkan pada aplikasi JDBC.</em>
 </p>
 
 ---
